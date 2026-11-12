@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Affiliate & Content Hub — Honest Reviews & Editorial Guides</title>
+  <meta name="description" content="Personal content feed, honest hardware reviews, and curated affiliate catalog.">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div id="announcement-bar" class="announcement-bar" style="display:none;"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="site-brand">
+        <span class="site-brand-text">Affiliate & Content Hub</span>
+      </a>
+
+      <nav class="main-nav">
+        <a href="/" class="nav-link active">Home</a>
+        <a href="/product" class="nav-link">Products</a>
+        <a href="#about" class="nav-link" onclick="openPageModal('about')">About</a>
+        <a href="#contact" class="nav-link" onclick="openPageModal('contact')">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="/product" class="icon-btn" title="View Saved Wishlist">
+          <span>Wishlist</span>
+          <span id="wishlist-count" class="badge">0</span>
+        </a>
+        <button class="icon-btn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+          <span>Theme</span>
+        </button>
+        <a href="/admin" class="icon-btn" title="Owner Admin Login">
+          <span>Admin</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero-card">
+      <h1 class="hero-heading" id="hero-title">Thoughtful recommendations, tested tools, and honest guides.</h1>
+      <p class="hero-text" id="hero-desc">I test products, share breakdowns, and curate the best deals across tech, audio, and creator gear. Every opinion is independent.</p>
+    </section>
+
+    <!-- Content Type Filter Chips -->
+    <div class="chips-bar">
+      <button class="chip-btn active" data-type="all" onclick="filterPosts('all', this)">All Content</button>
+      <button class="chip-btn" data-type="blog" onclick="filterPosts('blog', this)">Blogs</button>
+      <button class="chip-btn" data-type="video" onclick="filterPosts('video', this)">Videos</button>
+      <button class="chip-btn" data-type="link" onclick="filterPosts('link', this)">Link Shares</button>
+      <button class="chip-btn" data-type="short" onclick="filterPosts('short', this)">Short Posts</button>
+    </div>
+
+    <!-- Posts Feed Grid -->
+    <div id="posts-container" class="posts-grid">
+      <!-- Injected via app.js -->
+    </div>
+
+    <div id="pagination-controls" style="margin-top:30px; text-align:center; display:none;">
+      <button id="prev-page" class="btn-secondary" onclick="changePage(-1)">Previous</button>
+      <span id="page-num" style="margin: 0 16px; font-weight:600;">Page 1</span>
+      <button id="next-page" class="btn-secondary" onclick="changePage(1)">Next</button>
+    </div>
+  </main>
+
+  <!-- Post Detail & Comments Modal -->
+  <div id="post-modal" class="modal-overlay" style="display:none;">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closePostModal()">&times;</button>
+      <div id="post-modal-body"></div>
+
+      <hr style="margin: 28px 0; border: none; border-top: 1px solid var(--line);">
+
+      <!-- Comments Section -->
+      <section class="comments-section">
+        <h3 style="font-family: var(--font-serif); font-size:1.35rem; margin-bottom: 16px;">Comments</h3>
+        <div id="comments-list" style="margin-bottom: 24px;"></div>
+
+        <!-- Add Comment Form -->
+        <form id="comment-form" onsubmit="submitComment(event)">
+          <input type="hidden" id="comment-post-slug">
+          <input type="text" id="comment-hp" style="display:none;" tabindex="-1" autocomplete="off">
+          <div class="form-group">
+            <label class="form-label" for="comment-author">Name</label>
+            <input type="text" id="comment-author" class="form-control" required minlength="2" maxlength="50" placeholder="Your name">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="comment-body">Comment</label>
+            <textarea id="comment-body" class="form-control" rows="3" required minlength="2" maxlength="2000" placeholder="Share your perspective..."></textarea>
+          </div>
+          <div class="form-group" style="display:flex; align-items:center; gap:8px;">
+            <input type="checkbox" id="comment-remember" checked>
+            <label for="comment-remember" style="font-size:0.875rem; color:var(--ink-muted);">Remember me on this device (stored in local browser only)</label>
+          </div>
+          <button type="submit" class="btn-primary">Post Comment</button>
+        </form>
+      </section>
+    </div>
+  </div>
+
+  <!-- Legal & Contact Modal -->
+  <div id="page-modal" class="modal-overlay" style="display:none;">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closePageModal()">&times;</button>
+      <div id="page-modal-content"></div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-copy-text">&copy; 2026 Affiliate & Content Hub. All rights reserved.</div>
+      <div class="footer-links">
+        <a href="#about" onclick="openPageModal('about')">About</a>
+        <a href="#terms" onclick="openPageModal('terms')">Terms &amp; Conditions</a>
+        <a href="#privacy" onclick="openPageModal('privacy')">Privacy Policy</a>
+        <a href="#disclosure" onclick="openPageModal('disclosure')">Affiliate Disclosure</a>
+        <a href="/feed.xml" target="_blank">RSS Feed</a>
+      </div>
+    </div>
+    <div class="affiliate-disclaimer">
+      <strong>Disclosure:</strong> As an affiliate partner with Amazon and other retailers, I earn from qualifying purchases made via links on this site at zero additional cost to you.
+    </div>
+  </footer>
+
+  <script src="/theme.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

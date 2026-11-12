@@ -1,0 +1,15 @@
+[
+  {
+    "id": 1,
+    "category": "sponsorship",
+    "name": "Alex Vance",
+    "email": "alex@audiotechlab.io",
+    "subject": "Audio interface review unit & showcase inquiry",
+    "message": "Hello! We love your in-depth hardware reviews. We have an upcoming dual-channel USB-C interface launching next month and would love to send over an advance unit for your evaluation.",
+    "company": "AudioTech Labs",
+    "website": "https://audiotechlab.io",
+    "status": "new",
+    "internal_note": "Legitimate company. Check if shipping requires customs clearance.",
+    "created_at": "2026-11-09T08:14:00Z"
+  }
+]

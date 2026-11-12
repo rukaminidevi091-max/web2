@@ -1,0 +1,28 @@
+[
+  {
+    "id": 1,
+    "public_id": "com-101-alpha",
+    "post_slug": "why-i-switched-back-to-open-back-headphones",
+    "parent_id": null,
+    "author_name": "Arjun K.",
+    "body": "Couldn't agree more about the physical ear fatigue. Which specific open-back pair are you using as your daily driver right now?",
+    "is_owner": false,
+    "status": "published",
+    "edit_token_hash": "c775a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ce5",
+    "created_at": "2026-11-02T10:15:00Z",
+    "edited_at": null
+  },
+  {
+    "id": 2,
+    "public_id": "com-102-beta",
+    "post_slug": "why-i-switched-back-to-open-back-headphones",
+    "parent_id": 1,
+    "author_name": "Author",
+    "body": "I'm alternating between the Sennheiser HD600 and the Hifiman Sundara. Both have great breathable velour pads!",
+    "is_owner": true,
+    "status": "published",
+    "edit_token_hash": "owner-direct-reply",
+    "created_at": "2026-11-02T10:35:00Z",
+    "edited_at": null
+  }
+]

@@ -1,0 +1,30 @@
+{
+  "site_name": "Affiliate & Content Hub",
+  "tagline": "Curated reviews, honest guides, and hand-picked tools",
+  "hero_heading": "Thoughtful recommendations, tested tools, and honest guides",
+  "hero_text": "I test products, share breakdowns, and curate the best deals across tech, audio, and creator gear. Every opinion is independent.",
+  "color_primary": "#253b2b",
+  "color_accent": "#8fa58a",
+  "footer_text": "\u00a9 2026 Affiliate & Content Hub. All rights reserved.",
+  "announcement_text": "Spring Tech & Audio Guide updated with latest tested picks!",
+  "announcement_url": "/product",
+  "announcement_active": true,
+  "social_links": [
+    {"label": "YouTube", "url": "https://youtube.com"},
+    {"label": "Twitter / X", "url": "https://x.com"},
+    {"label": "GitHub", "url": "https://github.com"}
+  ],
+  "youtube_channel_url": "https://youtube.com",
+  "allow_comments": true,
+  "allow_reviews": true,
+  "hold_all_comments": false,
+  "hold_all_reviews": false,
+  "default_currency": "INR",
+  "posts_per_page": 12,
+  "products_per_page": 24,
+  "contact_notify_email": "contact@example.com",
+  "contact_retention_days": 365,
+  "analytics_retention_days": 400,
+  "maintenance_mode": false,
+  "turnstile_enabled": false
+}

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Curated Affiliate Catalog — Gear & Tested Products</title>
+  <meta name="description" content="Browse tested headphones, audio gear, and creator desk products with honest pricing.">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div id="announcement-bar" class="announcement-bar" style="display:none;"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="site-brand">
+        <span class="site-brand-text">Affiliate & Content Hub</span>
+      </a>
+
+      <nav class="main-nav">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/product" class="nav-link active">Products</a>
+        <a href="/#about" class="nav-link">About</a>
+        <a href="/#contact" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="icon-btn" onclick="openWishlistModal()" title="View Saved Items">
+          <span>Wishlist</span>
+          <span id="wishlist-count-badge" class="badge">0</span>
+        </button>
+        <button class="icon-btn" onclick="toggleTheme()" title="Toggle Theme">
+          <span>Theme</span>
+        </button>
+        <a href="/admin" class="icon-btn" title="Admin Portal">
+          <span>Admin</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="catalog-header">
+      <div>
+        <h1 style="font-family: var(--font-serif); font-size:1.85rem;">Affiliate Catalog</h1>
+        <p style="color:var(--ink-muted); font-size:0.95rem;">Independent ratings, specs, and price-tracked affiliate links.</p>
+      </div>
+
+      <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
+        <input type="text" id="catalog-search" class="search-input" placeholder="Search products, brands, specs..." oninput="handleCatalogSearch(this.value)">
+        <select id="catalog-sort" class="sort-select" onchange="handleCatalogSort(this.value)">
+          <option value="newest">Sort: Newest</option>
+          <option value="top_rated">Sort: Top Rated</option>
+          <option value="popular">Sort: Most Popular</option>
+          <option value="price_asc">Price: Low to High</option>
+          <option value="price_desc">Price: High to Low</option>
+          <option value="name_asc">Alphabetical (A-Z)</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="catalog-layout">
+      <!-- Filters Panel -->
+      <aside class="filters-panel">
+        <div class="filter-group">
+          <div class="filter-title">Category</div>
+          <div id="category-filters" class="filter-options">
+            <label class="filter-label">
+              <input type="radio" name="cat-filter" value="" checked onchange="filterCategory('')"> All Categories
+            </label>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-title">Availability</div>
+          <div class="filter-options">
+            <label class="filter-label">
+              <input type="radio" name="avail-filter" value="all" checked onchange="filterAvailability('all')"> All Items
+            </label>
+            <label class="filter-label">
+              <input type="radio" name="avail-filter" value="in_stock" onchange="filterAvailability('in_stock')"> In Stock Only
+            </label>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-title">Minimum Rating</div>
+          <div class="filter-options">
+            <label class="filter-label">
+              <input type="radio" name="rating-filter" value="0" checked onchange="filterRating(0)"> Any Rating
+            </label>
+            <label class="filter-label">
+              <input type="radio" name="rating-filter" value="4.5" onchange="filterRating(4.5)"> 4.5 Stars &amp; Above
+            </label>
+            <label class="filter-label">
+              <input type="radio" name="rating-filter" value="4.0" onchange="filterRating(4.0)"> 4.0 Stars &amp; Above
+            </label>
+          </div>
+        </div>
+
+        <button class="btn-secondary" style="width:100%; margin-top:10px;" onclick="resetAllFilters()">Clear Filters</button>
+      </aside>
+
+      <!-- Products Grid -->
+      <section>
+        <div id="products-grid" class="products-grid">
+          <!-- Loaded via app.js -->
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Product Detail Modal -->
+  <div id="product-modal" class="modal-overlay" style="display:none;">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeProductModal()">&times;</button>
+      <div id="product-modal-body"></div>
+
+      <hr style="margin: 28px 0; border: none; border-top: 1px solid var(--line);">
+
+      <!-- Reviews Section -->
+      <section class="reviews-section">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+          <h3 style="font-family: var(--font-serif); font-size:1.35rem;">Customer Reviews</h3>
+          <button class="btn-secondary" onclick="toggleReviewForm()">Write a Review</button>
+        </div>
+
+        <div id="review-form-container" style="display:none; background:var(--surface-raised); padding:18px; border-radius:var(--radius-md); margin-bottom:24px;">
+          <form id="review-form" onsubmit="submitReview(event)">
+            <input type="hidden" id="review-product-slug">
+            <input type="text" id="review-hp" style="display:none;" tabindex="-1">
+            <div class="form-group">
+              <label class="form-label" for="review-name">Name</label>
+              <input type="text" id="review-name" class="form-control" required minlength="2" maxlength="50">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="review-rating">Rating</label>
+              <select id="review-rating" class="form-control" required>
+                <option value="5">5 Stars — Flawless</option>
+                <option value="4">4 Stars — Solid Pick</option>
+                <option value="3">3 Stars — Average</option>
+                <option value="2">2 Stars — Underwhelming</option>
+                <option value="1">1 Star — Do Not Recommend</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="review-title">Review Title</label>
+              <input type="text" id="review-title" class="form-control" maxlength="80" placeholder="Summary of your experience">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="review-body">Detailed Review</label>
+              <textarea id="review-body" class="form-control" rows="3" required minlength="10" maxlength="3000"></textarea>
+            </div>
+            <button type="submit" class="btn-primary">Submit Review</button>
+          </form>
+        </div>
+
+        <div id="reviews-list"></div>
+      </section>
+    </div>
+  </div>
+
+  <!-- Wishlist Modal -->
+  <div id="wishlist-modal" class="modal-overlay" style="display:none;">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeWishlistModal()">&times;</button>
+      <h2 style="font-family: var(--font-serif); font-size:1.5rem; margin-bottom:14px;">My Saved Wishlist</h2>
+      <p style="color:var(--ink-muted); font-size:0.9rem; margin-bottom:20px;">Saved locally on this device. Clear cookies/cache to reset.</p>
+      <div id="wishlist-items-container"></div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-copy-text">&copy; 2026 Affiliate & Content Hub. All rights reserved.</div>
+      <div class="footer-links">
+        <a href="/">Home</a>
+        <a href="/feed.xml" target="_blank">RSS</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/theme.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

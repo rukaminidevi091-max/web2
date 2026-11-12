@@ -1,0 +1,11 @@
+[
+  {
+    "id": 1,
+    "at": "2026-11-01T00:00:00Z",
+    "actor": "admin",
+    "action": "system_bootstrap",
+    "entity": "system",
+    "entity_id": "seed",
+    "summary": "Database initialized with core settings, catalog categories, and seed products."
+  }
+]
